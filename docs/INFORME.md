@@ -4,8 +4,8 @@ Completar y hacer crecer en cada entrega. No hace falta prosa larga: oraciones c
 
 ## 1. Grupo y tema
 
-- Tema:
-- Por qué lo eligieron (5–8 líneas):
+- Tema: Biblioteca musical
+- Por qué lo eligieron (5–8 líneas): Elegimos el tema de la biblioteca de música por interés en la temática musical. Además, la estructura de un catálogo musical permite modelar y manipular múltiples atributos complejos, como géneros, datos de artistas, duraciones, etc.
 
 ## 2. Modelo
 
