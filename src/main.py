@@ -1,4 +1,5 @@
 from src.config import TEMA
+from src.dominio.canciones import listar_canciones
 
 TEMAS = {
     "pokedex": "Pokédex",
@@ -36,12 +37,15 @@ def main():
     while opcion != "0":
         mostrar_menu()
         opcion = input("> ").strip()
-        if opcion == "0":
-            print("Chau.")
-        elif opcion in {"1", "2", "3", "4", "5", "6", "7", "8", "9"}:
-            pendiente()
-        else:
-            print("Opción inválida.")
+        match opcion:
+            case '0':
+                print("Chau.")
+            case '1':
+                listar_canciones()
+            case '2'|'3'|'4'|'5'|'6'|'7'|'8'|'9':
+                pendiente()
+            case _:
+                print("Opción inválida.")
 
 
 if __name__ == "__main__":
