@@ -12,7 +12,9 @@ Completar y hacer crecer en cada entrega. No hace falta prosa larga: oraciones c
 Qué es un ítem del catálogo. Qué es mutable y qué no (E1). Cómo se relacionan catálogo, colección principal, pila y cola.
 
 ```text
-(pueden pegar un diagrama ASCII o una lista de clases)
+- Un ítem del catálogo suele ser una estructura de datos que representa una canción identificada de forma única y que agrupa sus atributos (título, artista, duración, etc.).
+- De esta entrega lo unico inmutable es la lista de canciones 'DUMMY' en 'src/dominio/canciones.py'. Por el momento no hay nada mutable hasta aplicar las proximas funcionalidades.
+- La colección principal almacena las canciones seleccionadas por el usuario tomando como referencia los datos del catálogo (repositorio global). Sobre esa colección se operan la cola, que gestiona las canciones pendientes a reproducirse en el orden en que fueron agregadas, y la pila, que guarda el historial de reproducción reciente para permitir volver a las canciones escuchadas previamente.
 ```
 
 ## 3. Recursión (E2)
