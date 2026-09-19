@@ -1,5 +1,5 @@
 from src.config import TEMA
-from src.dominio.canciones import listar_canciones
+from src.dominio import BIBLIOTECA
 
 TEMAS = {
     "pokedex": "Pokédex",
@@ -41,8 +41,10 @@ def main():
             case '0':
                 print("Chau.")
             case '1':
-                listar_canciones()
-            case '2'|'3'|'4'|'5'|'6'|'7'|'8'|'9':
+                BIBLIOTECA.listar()
+            case '5':
+                BIBLIOTECA.versiones_de(input('ID: '))
+            case '2'|'3'|'4'|'6'|'7'|'8'|'9':
                 pendiente()
             case _:
                 print("Opción inválida.")
