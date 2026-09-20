@@ -42,6 +42,8 @@ def main():
                 print("Chau.")
             case '1':
                 BIBLIOTECA.listar()
+            case '3':
+                BIBLIOTECA.buscar(input('ID: '))
             case '5':
                 BIBLIOTECA.versiones_de(input('ID: '))
             case '2'|'3'|'4'|'6'|'7'|'8'|'9':

@@ -11,16 +11,13 @@ class Biblioteca:
         for cancion in self._canciones:
             print(cancion)
 
-    def buscar(self, id_cancion):
-        """Devuelve la Cancion con ese id.
-
-        return -> None | Cancion
-        """
+    def buscar(self, id_cancion, pre= ''):
+        """Devuelve la Cancion con ese id."""
         id_cancion = int(id_cancion)
         for c in self._canciones:
             if c.id == id_cancion:
-                return c
-        return None
+                return print(f'{pre}{c}')
+        return print(f'No existe la cancion id: {id_cancion}')
 
     def buscar_versiones(self, id_cancion):
         """IDs de las canciones que son versión (cover/live/remix) directa de id_cancion."""
@@ -30,14 +27,13 @@ class Biblioteca:
             if fila['version_de_id'] == id_cancion
         ]
 
-    def versiones_de(self, id_cancion):
-        versiones_ = self.buscar_versiones(id_cancion)
+    def versiones_de(self, id_cancion, pre= ''):
+        self.buscar(id_cancion, pre)
 
-        if not versiones_:
-            return []
-        resultados = list(versiones_)
+        versiones = self.buscar_versiones(id_cancion)
 
-        for v in versiones_:
-            resultados.append(self.versiones_de(v))
-
-        print(resultados)
+        if not versiones:
+            return
+        
+        for v in versiones:
+            self.versiones_de(v, f'{pre}-')

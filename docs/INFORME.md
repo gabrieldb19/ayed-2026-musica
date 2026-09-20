@@ -19,10 +19,42 @@ Qué es un ítem del catálogo. Qué es mutable y qué no (E1). Cómo se relacio
 
 ## 3. Recursión (E2)
 
-- Función:
-- Caso base:
-- Caso recursivo:
-- Traza de un ejemplo real del dataset:
+- Función: Biblioteca.versiones_de(id_cancion, pre)
+- Caso base: Si no hay versiones simplemente 'return' para terminar esa llamada.
+- Caso recursivo: Itera por las diferentes versiones llamando nuevamente a si misma -> versiones_de(v, f'{pre}-'). El argumento 'pre' es un prefijo para mostrar las sub canciones tabuladas. Ej:
+    ```
+    Cancion_original
+    -Subcancion1
+    --Subsubcancion1
+    -Subcancion2
+    ```
+- Traza para cancion ID = 1: segun versiones.csv, 1 -> 62
+
+Llamada 1: 
+    versiones_de(id_canciones = 1, pre = '') -> buscar(id_canciones = 1, pre = '') Muestra, si existe, la cancion -> buscar_versiones(id_cancion) = [62] -> itera por la lista de versiones llamando a versiones_de(id_canciones = 62, pre = f'{pre}-')
+
+Llamada 2:
+    versiones_de(id_canciones = 1, pre = '-') -> buscar(id_canciones = 1, pre = '-') Muestra, si existe, la cancion -> buscar_versiones(id_cancion) = [None] -> return
+
+Output:
+```
+=== Biblioteca musical — AyED C2 2026 ===
+1. Listar catálogo
+2. Ver detalle
+3. Buscar
+4. Ordenar
+5. Operación recursiva
+6. Colección principal (equipo / menú / playlist)
+7. Historial (pila)
+8. Cola
+9. Guardar / cargar archivos
+0. Salir
+> 5
+ID: 1
+[1] De Musica Ligera - Soda Stereo (1990)
+-[62] De Musica Ligera (Unplugged) - Soda Stereo (1996)
+```
+
 
 ## 4. TADs (E3)
 
