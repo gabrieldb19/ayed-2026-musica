@@ -42,11 +42,13 @@ def main():
                 print("Chau.")
             case '1':
                 BIBLIOTECA.listar()
+            case '2':
+                BIBLIOTECA.ver_detalle(input('ID: '))
             case '3':
-                BIBLIOTECA.buscar(input('ID: '))
+                print(BIBLIOTECA.buscar(input('ID: '))) #TODO ---> Solucion temporal
             case '5':
                 BIBLIOTECA.versiones_de(input('ID: '))
-            case '2'|'3'|'4'|'6'|'7'|'8'|'9':
+            case '4'|'6'|'7'|'8'|'9':
                 pendiente()
             case _:
                 print("Opción inválida.")

@@ -11,13 +11,21 @@ class Biblioteca:
         for cancion in self._canciones:
             print(cancion)
 
-    def buscar(self, id_cancion, pre= ''):
-        """Devuelve la Cancion con ese id."""
+    def buscar(self, id_cancion):
         id_cancion = int(id_cancion)
         for c in self._canciones:
             if c.id == id_cancion:
-                return print(f'{pre}{c}')
-        return print(f'No existe la cancion id: {id_cancion}')
+                return c
+        return None
+
+    def ver_detalle(self, id_cancion, pre= ''):
+        """Devuelve la Cancion con ese id."""
+        cancion = self.buscar(id_cancion)
+        
+        if cancion:
+            print(f'{pre}{cancion}')
+        else:
+            print(f'No existe la cancion id: {id_cancion}')
 
     def buscar_versiones(self, id_cancion):
         """IDs de las canciones que son versión (cover/live/remix) directa de id_cancion."""
@@ -28,7 +36,7 @@ class Biblioteca:
         ]
 
     def versiones_de(self, id_cancion, pre= ''):
-        self.buscar(id_cancion, pre)
+        self.ver_detalle(id_cancion, pre)
 
         versiones = self.buscar_versiones(id_cancion)
 
