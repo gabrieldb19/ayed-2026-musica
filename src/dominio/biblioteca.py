@@ -1,10 +1,14 @@
 from src.dominio.canciones import Cancion
 from src.persistencia.texto import cargar_csv
+from src.tads import ListaEnlazada
 
 class Biblioteca:
     def __init__(self, ruta_canciones='data/canciones.csv', ruta_versiones='data/versiones.csv') -> None:
-        self._canciones = [Cancion(**fila) for fila in cargar_csv(ruta_canciones)]
+        self._canciones = ListaEnlazada()
         self._versiones = cargar_csv(ruta_versiones)
+
+        for fila in cargar_csv(ruta_canciones):
+            self._canciones.insertar_al_final(Cancion(**fila))
 
 
     def listar(self):
