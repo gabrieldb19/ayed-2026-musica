@@ -5,35 +5,39 @@ class Pila:
     """TAD pila implementado sobre ListaEnlazada."""
 
     def __init__(self):
-        self._items = ListaEnlazada()
+        self.__items = ListaEnlazada()
 
     def __str__(self) -> str:
-        return str(self._items)
+        return str(self.__items)
 
     def apilar(self, dato):
-        self._items.insertar_al_final(dato)
+        self.__items.insertar_al_final(dato)
 
     def desapilar(self):
-        if self._items.esta_vacia():
+        if self.__items.esta_vacia():
             raise PilaVaciaError('Vacia la wea')
 
         n = 0
-        for dato in self._items:
-            if n == self._items.tamanio:
+        for dato in self.__items:
+            if n == self.__items.tamanio:
                 resultado = dato
-                self._items.eliminar(dato)
+                self.__items.eliminar(dato)
                 return resultado
             n += 1
 
     def ver_tope(self):
-        if self._items.esta_vacia():
+        if self.__items.esta_vacia():
             raise PilaVaciaError('Vacia la wea')
 
         n = 0
-        for dato in self._items:
-            if n == self._items.tamanio:
+        for dato in self.__items:
+            if n == self.__items.tamanio:
                 return dato
             n += 1
 
     def esta_vacia(self):
-        return self._items.esta_vacia()
+        return self.__items.esta_vacia()
+
+    @property
+    def items(self):
+        return self.__items

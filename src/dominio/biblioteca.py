@@ -16,11 +16,14 @@ class Biblioteca:
             print(cancion)
 
     def buscar(self, id_cancion):
-        id_cancion = int(id_cancion)
-        for c in self._canciones:
-            if c.id == id_cancion:
-                return c
-        return None
+        try:
+            id_cancion = int(id_cancion)
+            for c in self._canciones:
+                if c.id == id_cancion:
+                    return c
+        except Exception as e:
+            print(e)
+            return None
 
     def ver_detalle(self, id_cancion, pre= ''):
         """Devuelve la Cancion con ese id."""
