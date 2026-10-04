@@ -1,6 +1,7 @@
 from src.dominio.canciones import Cancion
 from src.persistencia.texto import cargar_csv
 from src.tads import ListaEnlazada
+from src.excepciones import ItemNoEncontradoError
 
 class Biblioteca:
     def __init__(self, ruta_canciones='data/canciones.csv', ruta_versiones='data/versiones.csv') -> None:
@@ -21,18 +22,17 @@ class Biblioteca:
             for c in self._canciones:
                 if c.id == id_cancion:
                     return c
+            else:   raise ItemNoEncontradoError("# Cancion no encontrada")
         except Exception as e:
-            print(e)
-            return None
+            return "Error de ID"
 
     def ver_detalle(self, id_cancion, pre= ''):
         """Devuelve la Cancion con ese id."""
-        cancion = self.buscar(id_cancion)
-        
-        if cancion:
+        try:
+            cancion = self.buscar(id_cancion)
             print(f'{pre}{cancion}')
-        else:
-            print(f'No existe la cancion id: {id_cancion}')
+        except ItemNoEncontradoError as e:
+            print(e)
 
     def buscar_versiones(self, id_cancion):
         """IDs de las canciones que son versión (cover/live/remix) directa de id_cancion."""

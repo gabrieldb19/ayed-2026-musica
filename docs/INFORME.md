@@ -60,11 +60,13 @@ ID: 1
 
 | TAD | Operaciones | Invariante |
 | --- | --- | --- |
-| ListaEnlazada |  |  |
-| Pila |  |  |
-| Cola |  |  |
+| ListaEnlazada | insertar_al_inicio(), insertar_al_final(), eliminar(), buscar(), property: tamanio | esta_vacia() |
+| Pila | apilar(), desapilar(), ver_tope(), property: items | esta_vacia() |
+| Cola | encolar(), desencolar(), ver_frente(), property: items | esta_vacia() |
 
-Dónde se usa cada uno en el dominio.
+ListaEnlazada: Se usar en la clase Biblioteca para almacenar las canciones de la misma.
+
+Pila y Cola: Ambos se usan en la clase Playlist para representar la lista de canciones a reproducir y el historial reproducido.
 
 ## 5. Complejidad (E4)
 

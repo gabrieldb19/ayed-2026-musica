@@ -22,7 +22,7 @@ class ListaEnlazada:
         self.__tamanio = 0
 
     def __str__(self):
-        return str(list(self))
+        return str(list(self)) #TODO Hace print de la clase y espacio en memoria que ocupa
     
     def __iter__(self):
         return self.IteradorLista(self.header)

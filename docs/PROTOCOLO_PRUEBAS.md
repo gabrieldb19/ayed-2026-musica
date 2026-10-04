@@ -12,10 +12,10 @@ Mínimos: 8 casos escritos en E2; ejecutados en E3; 15 de regresión en E6 (pila
 | P02 | E1 | Elegir un ítem inexistente | id = -1 | mensaje claro, el menú sigue |  pasa|  Falta agregar captura de excepciones.|
 | P03 | E2 | Operación recursiva sobre un ítem con cadena | ver consigna §3.3 | imprime la cadena completa |  pasa|  |
 | P04 | E2 | Operación recursiva sobre un ítem sin derivados |  | solo el ítem (caso base) |  pasa|  |
-| P05 | E3 | Agregar a la colección principal hasta el tope | equipo de 6 / equivalente | el séptimo falla con excepción propia |  no corrido|  |
-| P06 | E3 | Desapilar historial vacío | pila vacía | excepción propia, menú sigue |  no corrido|  |
-| P07 | E3 | Desencolar cola vacía | cola vacía | excepción propia, menú sigue |  no corrido|  |
-| P08 | E3 | Listar colección con el iterador | 2+ ítems | el orden coincide con las inserciones |  no corrido|  |
+| P05 | E3 | Agregar a la colección principal hasta el tope | equipo de 6 / equivalente | el séptimo falla con excepción propia | sin limite | Como se trata de una playlist, no pusimos limite. |
+| P06 | E3 | Desapilar historial vacío | pila vacía | excepción propia, menú sigue | pasa |  |
+| P07 | E3 | Desencolar cola vacía | cola vacía | excepción propia, menú sigue | pasa |  |
+| P08 | E3 | Listar colección con el iterador | 2+ ítems | el orden coincide con las inserciones | pasa |  |
 | P09 | E4 | Búsqueda lineal de un nombre que existe |  | lo encuentra |  |  |
 | P10 | E4 | Búsqueda lineal de un nombre que no existe |  | no encontrado, sin traceback |  |  |
 | P11 | E4 | Búsqueda binaria con catálogo desordenado |  | avisa o reordena; no da un falso hit |  |  |
