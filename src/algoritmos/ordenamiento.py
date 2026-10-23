@@ -5,4 +5,5 @@ def ordenar_seleccion(coleccion, clave):
 
 def ordenar_insercion(coleccion, clave):
     """Ordenamiento por inserción. Devuelve una nueva secuencia, no usa sorted."""
-    raise NotImplementedError
+    raise NotImplementedError 
+
