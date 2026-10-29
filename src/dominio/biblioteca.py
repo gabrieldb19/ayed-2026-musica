@@ -24,7 +24,7 @@ class Biblioteca:
                     return c
             else:   raise ItemNoEncontradoError("# Cancion no encontrada")
         except Exception as e:
-            return "Error de ID"
+            print(e)
 
     def ver_detalle(self, id_cancion, pre= ''):
         """Devuelve la Cancion con ese id."""

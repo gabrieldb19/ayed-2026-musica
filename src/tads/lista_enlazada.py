@@ -1,3 +1,4 @@
+from collections import deque
 from src.tads.nodo import Nodo
 
 class ListaEnlazada:
@@ -18,7 +19,7 @@ class ListaEnlazada:
 
 
     def __init__(self):
-        self.header = None
+        self.header: None | Nodo = None
         self.__tamanio = 0
 
     def __str__(self):
@@ -26,6 +27,30 @@ class ListaEnlazada:
     
     def __iter__(self):
         return self.IteradorLista(self.header)
+
+    def __getitem__(self, key):
+        if not isinstance(key, int):
+            raise TypeError("El índice debe ser un entero")
+
+        if key >= 0:
+            for i, elem in enumerate(self):
+                if i == key:
+                    return elem
+        else:
+            d = deque(maxlen=abs(key))
+            for elem in self:
+                d.append(elem)
+            print(d)
+
+            if len(d) < abs(key):
+                raise IndexError
+            
+            return d[0]
+        
+        raise IndexError
+
+    def __len__(self):
+        return self.tamanio
 
 
     def esta_vacia(self) -> bool:
@@ -69,16 +94,6 @@ class ListaEnlazada:
             actual = actual._nxt
 
         return False
-
-    def buscar(self, dato):
-        actual = self.header
-
-        while actual:
-            if actual._elem == dato:
-                return actual._elem
-            actual = actual._nxt
-        
-        return None
 
 
     @property
