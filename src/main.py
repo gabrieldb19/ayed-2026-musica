@@ -1,6 +1,7 @@
 from src.config import TEMA
 from src.dominio import BIBLIOTECA, PLAYLIST
 from src.decor import opcion
+from src.algoritmos import *
 
 TEMAS = {
     "pokedex": "Pokédex",
@@ -17,14 +18,13 @@ menu = ["",
         f"=== {nombre} — AyED C2 2026 ===", 
         "1. Listar catálogo", 
         "2. Ver detalle", 
-        "3. Buscar", 
-        "4. Ordenar", 
-        "5. Operación recursiva", 
-        "6. Playlist (mostrar opciones)", 
-        "7. Guardar / cargar archivos", 
+        "3. Buscar/Ordenar", 
+        "4. Operación recursiva", 
+        "5. Playlist (mostrar opciones)", 
+        "6. Guardar / cargar archivos", 
         "0. Salir"]
 
-sub = ["=== Playlist ===",
+sub_playlist = ["=== Playlist ===",
         "6.1. Mostrar playlist",
         "6.2. Agregar a playlist",
         "6.3. Playlist (next)",
@@ -32,8 +32,37 @@ sub = ["=== Playlist ===",
         "6.5. Historial (quitar)",
         "0. Volver al menu principal"]
 
+sub_bo = ["=== Busqueda - Ordenamiento ===",
+        "3.1. Busqueda Lineal",
+        "3.2. Busqueda Binaria",
+        "3.3. Ordenar por Seleccion",
+        "3.4. Ordenar por Insercion",
+        "0. Volver al menu principal"]
+
 menu = "\n".join(menu)
-sub = "\n".join(sub)
+sub = "\n".join(sub_playlist)
+bo = "\n".join(sub_bo)
+
+@opcion(msg= bo)
+def bo_menu_match(opcion= None):
+    match opcion:
+        case 0:
+            return False
+        case 1:
+            id_ = input("ID: ").strip()
+            cancion = busqueda_lineal(BIBLIOTECA._canciones, id_)
+            if cancion:
+                print(cancion)
+        case 2:
+            pendiente()
+        case 3:
+            pendiente()
+        case 4:
+            pendiente()
+        case _:
+            print("Opción inválida.")
+    
+    return True
 
 @opcion(msg= sub)
 def sub_menu_match(opcion= None):
@@ -67,20 +96,25 @@ def menu_match(opcion= None):
         case 1:
             BIBLIOTECA.listar()
         case 2:
-            BIBLIOTECA.ver_detalle(input('ID: '))
+            id_ = input('ID: ')
+            BIBLIOTECA.ver_detalle(id_)
         case 3:
-            print(BIBLIOTECA.buscar(input('ID: '))) #TODO ---> Solucion temporal
-        case 5:
+            bo_menu()
+        case 4:
             BIBLIOTECA.versiones_de(input('ID: '))
-        case 6:
+        case 5:
             sub_menu()
-        case 4|7:
+        case 6:
             pendiente()
         case _:
             print("Opción inválida.")
     
     return True
 
+def bo_menu():
+    continuar = True
+    while continuar:
+        continuar = bo_menu_match()
 
 def sub_menu():
     continuar = True
