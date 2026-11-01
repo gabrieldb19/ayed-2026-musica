@@ -78,7 +78,23 @@ Mediciones (`time.perf_counter`):
 
 | Operación | n | segundos |
 | --- | --- | --- |
-|  |  |  |
+| búsqueda lineal (list, original) | 67 | 0.000004 |
+| búsqueda binaria (list, original) | 67 | 0.000001 |
+| búsqueda binaria (ListaEnlazada, original) | 67 | 0.000011 |
+| orden selección aleatorio (original) | 67 | 0.000245 |
+| orden inserción aleatorio (original) | 67 | 0.000123 |
+| orden selección ya ordenado (original) | 67 | 0.000284 |
+| orden inserción ya ordenado (original) | 67 | 0.000015 |
+| búsqueda lineal (list, x10) | 670 | 0.000035 |
+| búsqueda binaria (list, x10) | 670 | 0.000001 |
+| búsqueda binaria (ListaEnlazada, x10) | 670 | 0.000087 |
+| orden selección aleatorio (x10) | 670 | 0.025126 |
+| orden inserción aleatorio (x10) | 670 | 0.012445 |
+| orden selección ya ordenado (x10) | 670 | 0.026126 |
+| orden inserción ya ordenado (x10) | 670 | 0.000101 |
+
+- Selección estable: False
+- Inserción estable: True
 
 ## 6. Persistencia (E5)
 
