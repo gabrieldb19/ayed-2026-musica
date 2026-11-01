@@ -21,6 +21,8 @@ class Biblioteca:
         for fila in cargar_csv(ruta_canciones):
             self._canciones.insertar_al_final(Cancion(**fila))
 
+        self._orden = "id"
+
 
     def listar(self):
         print(self._canciones)
