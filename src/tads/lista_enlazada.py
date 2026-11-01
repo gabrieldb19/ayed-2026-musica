@@ -1,4 +1,3 @@
-import random
 from collections import deque
 from src.tads.nodo import Nodo
 from functools import lru_cache
@@ -31,23 +30,6 @@ class ListaEnlazada:
     
     def __iter__(self):
         return self.IteradorLista(self.header)
-
-    def __add__(self, other):
-        if not isinstance(other, ListaEnlazada):
-            raise TypeError(f'Objeto esperado para adicion: <ListaEnlazada>\nObjeto obtenido: {type(other)}')
-
-        if self.esta_vacia():
-            self.header = other.header
-            self.__tamanio += other.tamanio
-        else:
-            n = self.header
-            while n._nxt:
-                n = n._nxt
-    
-            n._nxt = other.header
-            self.__tamanio += other.tamanio
-
-        return self
 
     def __getitem__(self, key):
         if not isinstance(key, int):
@@ -132,26 +114,7 @@ class ListaEnlazada:
 
         return False
 
-    def shuffle(self):
-        index = [n for n in range(self.tamanio)]
-        random.shuffle(index)
-        new = ListaEnlazada()
-
-        for i in index:
-            new.insertar_al_final(self[i])
-        else: return new
-
 
     @property
     def tamanio(self):
         return self.__tamanio
-
-
-if __name__ == "__main__":
-    # For test only!
-    lista = ListaEnlazada()
-    for i in range(100):
-        lista.insertar_al_final(i)
-
-    print(lista)
-    print(lista.shuffle())

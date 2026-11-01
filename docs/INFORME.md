@@ -74,6 +74,17 @@ Pila y Cola: Ambos se usan en la clase Playlist para representar la lista de can
 | --- | --- | --- | --- |
 |  |  |  |  |
 
+| Operación | Tiempo | Espacio | Por qué |
+| --- | --- | --- | --- |
+| Listar catálogo | O(n) |O(1) | El iterador recorre cada nodo una vez. |
+| Ver detalle por id | O(n) mejor caso O(1)|	O(1)|	Hace una búsqueda lineal sobre la lista enlazada.|
+| Búsqueda lineal | O(n) peor / O(1) mejor | O(1) | Compara elemento a elemento hasta encontrarlo o llegar al final. |
+| Búsqueda binaria (sobre list) | O(log n)| O(1) | Cada comparación descarta la mitad del rango. |
+| Búsqueda binaria desde ListaEnlazada | O(n) | O(n) | Convertir a list cuesta O(n) y domina sobre las log n comparaciones. |
+| Ordenar por selección | O(n²) siempre | O(1) | Dos bucles anidados: n + (n−1) + … + 1 ≈ n²/2 comparaciones, esté o no ordenado. |
+| Ordenar por inserción | O(n) mejor / O(n²) peor y promedio | O(1) | Si ya está ordenado hace 1 comparación por elemento; si está al revés, desplaza todo. |
+| Ordenar el catálogo (menú) | O(n²) | O(n) | Se pasa a list (O(n)), se ordena y se reconstruye la lista enlazada (O(n)). |
+
 Mediciones (`time.perf_counter`):
 
 | Operación | n | segundos |
