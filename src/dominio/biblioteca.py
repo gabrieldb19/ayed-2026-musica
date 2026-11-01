@@ -2,6 +2,16 @@ from src.dominio.canciones import Cancion
 from src.persistencia.texto import cargar_csv
 from src.tads import ListaEnlazada
 from src.excepciones import ItemNoEncontradoError
+from src.algoritmos import busqueda_lineal, busqueda_binaria, ordenar_insercion
+from src.algoritmos.ordenamiento import ordenar_insercion
+
+CLAVES = {
+    "id": lambda c: c.id,
+    "titulo": lambda c: c.titulo.lower(),
+    "artista": lambda c: c.artista.lower(),
+    "anio": lambda c: c.anio,
+    "duracion": lambda c: c.duracion_seg,
+}
 
 class Biblioteca:
     def __init__(self, ruta_canciones='data/canciones.csv', ruta_versiones='data/versiones.csv') -> None:
@@ -51,3 +61,34 @@ class Biblioteca:
         
         for v in versiones:
             self.versiones_de(v, f'{pre}-')
+
+    def _normalizar(self, campo, valor):
+        return int(valor) if campo == "id" else valor.strip().lower()
+
+    def ordenar(self, algoritmo, campo):
+        datos = list(self._canciones)              # O(n)
+        algoritmo(datos, CLAVES[campo])            # O(n²) / O(n) mejor caso
+        nueva = ListaEnlazada()
+        for c in reversed(datos):                  # O(n) (insertar_al_final sería O(n²))
+            nueva.insertar_al_inicio(c)
+        self._canciones = nueva
+        self._orden = campo
+
+    def buscar_lineal(self, campo, valor):
+        try:
+            clave = self._normalizar(campo, valor)
+        except ValueError:
+            print("# El ID debe ser un número")
+            return None
+        return busqueda_lineal(self._canciones, clave, CLAVES[campo])
+
+    def buscar_binaria(self, campo, valor):
+        try:
+            clave = self._normalizar(campo, valor)
+        except ValueError:
+            print("# El ID debe ser un número")
+            return None
+        if self._orden != campo:
+            print(f"Catálogo ordenado por {campo} (inserción); usando búsqueda binaria.")
+            self.ordenar(ordenar_insercion, campo)
+        return busqueda_binaria(list(self._canciones), clave, CLAVES[campo])

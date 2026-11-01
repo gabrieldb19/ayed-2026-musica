@@ -1,5 +1,6 @@
 from src.config import TEMA
 from src.dominio import BIBLIOTECA, PLAYLIST
+from src.dominio.biblioteca import CLAVES
 from src.decor import opcion
 from src.algoritmos import *
 
@@ -8,6 +9,18 @@ TEMAS = {
     "recetario": "Recetario",
     "musica": "Biblioteca musical",
 }
+
+def pedir_campo(campos):
+    for i, c in enumerate(campos, 1):
+        print(f"  {i}) {c}")
+    try:
+        i = int(input("> ").strip()) - 1
+        if 0 <= i < len(campos):
+            return campos[i]
+    except ValueError:
+        pass
+    print("Opción inválida.")
+    return None
 
 
 def pendiente():
@@ -44,33 +57,25 @@ sub = "\n".join(sub_playlist)
 bo = "\n".join(sub_bo)
 
 @opcion(msg= bo)
-def bo_menu_match(opcion= None):
+def bo_menu_match(opcion=None):
     match opcion:
         case 0:
             return False
-        case 1:
-            cancion = busqueda_lineal(BIBLIOTECA._canciones, input("ID: ").strip())
-            if cancion:
-                print(cancion)
-        case 2:
-            cancion = busqueda_binaria(BIBLIOTECA._canciones, input("ID: ").strip())
-            if cancion:
-                print(cancion)
-        case 3:
-            canciones_shuffle = BIBLIOTECA._canciones.shuffle()
-            print('--- Catalogo completo desordenado:')
-            print(canciones_shuffle)
-            print('--- Ordenamiento por seleccion:')
-            print(ordenar_seleccion(canciones_shuffle))
-        case 4:
-            canciones_shuffle = BIBLIOTECA._canciones.shuffle()
-            print('--- Catalogo completo desordenado:')
-            print(canciones_shuffle)
-            print('--- Ordenamiento por insercion:')
-            print(ordenar_insercion(canciones_shuffle))
+        case 1 | 2:
+            campo = pedir_campo(("id", "titulo"))
+            if campo:
+                valor = input(f"{campo}: ")
+                buscar = BIBLIOTECA.buscar_lineal if opcion == 1 else BIBLIOTECA.buscar_binaria
+                r = buscar(campo, valor)
+                print(r if r else "# Canción no encontrada")
+        case 3 | 4:
+            campo = pedir_campo(tuple(CLAVES))
+            if campo:
+                alg = ordenar_seleccion if opcion == 3 else ordenar_insercion
+                BIBLIOTECA.ordenar(alg, campo)
+                print(f"Catálogo ordenado por {campo} ({alg.__name__}).")
         case _:
             print("Opción inválida.")
-    
     return True
 
 @opcion(msg= sub)

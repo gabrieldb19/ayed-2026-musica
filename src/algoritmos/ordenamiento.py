@@ -1,23 +1,23 @@
-def ordenar_seleccion(coleccion): 
-    """Ordena la colección in place por selección (ascendente).""" 
-    n = len(coleccion) 
-    for i in range(n): 
-        pos_min = i 
-        for j in range(i + 1, n): 
-            if coleccion[j].id < coleccion[pos_min].id: 
-                pos_min = j 
-        coleccion[i], coleccion[pos_min] = coleccion[pos_min], coleccion[i] 
-    return coleccion 
+def ordenar_seleccion(coleccion, obtener_clave):
+    """In place, ascendente. NO estable. Espera un list (acceso O(1))."""
+    n = len(coleccion)
+    for i in range(n - 1):
+        pos_min = i
+        for j in range(i + 1, n):
+            if obtener_clave(coleccion[j]) < obtener_clave(coleccion[pos_min]):
+                pos_min = j
+        coleccion[i], coleccion[pos_min] = coleccion[pos_min], coleccion[i]
+    return coleccion
 
 
-
-def ordenar_insercion(coleccion): 
-    """Ordena la colección in place por inserción (ascendente).""" 
-    for i in range(1, len(coleccion)): 
-        actual = coleccion[i] 
-        j = i - 1 
-        while j >= 0 and coleccion[j].id > actual.id: 
+def ordenar_insercion(coleccion, obtener_clave):
+    """In place, ascendente. Estable. Espera un list (acceso O(1))."""
+    for i in range(1, len(coleccion)):
+        actual = coleccion[i]
+        clave = obtener_clave(actual)
+        j = i - 1
+        while j >= 0 and obtener_clave(coleccion[j]) > clave:
             coleccion[j + 1] = coleccion[j]
-            j -= 1 
+            j -= 1
         coleccion[j + 1] = actual
-    return coleccion 
+    return coleccion

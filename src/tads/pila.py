@@ -14,26 +14,17 @@ class Pila:
         self.__items.insertar_al_final(dato)
 
     def desapilar(self):
-        if self.__items.esta_vacia():
-            raise PilaVaciaError('Vacia la wea')
-
-        n = 0
-        for dato in self.__items:
-            if n == self.__items.tamanio:
-                resultado = dato
-                self.__items.eliminar(dato)
-                return resultado
-            n += 1
+        tope = self.ver_tope()
+        self.__items.eliminar(tope)
+        return tope
 
     def ver_tope(self):
         if self.__items.esta_vacia():
             raise PilaVaciaError('Vacia la wea')
 
-        n = 0
         for dato in self.__items:
-            if n == self.__items.tamanio:
-                return dato
-            n += 1
+            tope = dato
+        return tope
 
     def esta_vacia(self):
         return self.__items.esta_vacia()
