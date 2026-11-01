@@ -114,6 +114,21 @@ class ListaEnlazada:
 
         return False
 
+    def eliminar_ultimo(self):
+        if not self.header:
+            raise IndexError("Lista vacía")
+        if not self.header._nxt:
+            dato = self.header._elem
+            self.header = None
+        else:
+            ant = self.header
+            while ant._nxt._nxt:
+                ant = ant._nxt
+            dato = ant._nxt._elem
+            ant._nxt = None
+        self.__tamanio -= 1
+        return dato
+
 
     @property
     def tamanio(self):

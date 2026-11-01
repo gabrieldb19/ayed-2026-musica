@@ -15,7 +15,7 @@ class Cola:
 
     def desencolar(self):
         if self.__items.esta_vacia():
-            raise ColaVaciaError('Vacia la wea')
+            raise ColaVaciaError('Cola vacia')
 
         dato = self.__items.header._elem
         self.__items.eliminar(dato)
@@ -23,7 +23,7 @@ class Cola:
 
     def ver_frente(self):
         if self.__items.esta_vacia():
-            raise ColaVaciaError('Vacia la wea')
+            raise ColaVaciaError('Cola vacia')
 
         return self.__items.header._elem
 

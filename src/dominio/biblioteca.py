@@ -28,14 +28,11 @@ class Biblioteca:
         print(self._canciones)
 
     def buscar(self, id_cancion):
-        try:
-            id_cancion = int(id_cancion)
-            for c in self._canciones:
-                if c.id == id_cancion:
-                    return c
-            else:   raise ItemNoEncontradoError("# Cancion no encontrada")
-        except Exception as e:
-            print(e)
+        id_cancion = int(id_cancion)
+        for c in self._canciones:
+            if c.id == id_cancion:
+                return c
+        else:   raise ItemNoEncontradoError("# Cancion no encontrada")
 
     def ver_detalle(self, id_cancion, pre= ''):
         """Devuelve la Cancion con ese id."""
