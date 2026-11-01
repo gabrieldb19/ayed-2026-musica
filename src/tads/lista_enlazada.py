@@ -1,6 +1,7 @@
 import random
 from collections import deque
 from src.tads.nodo import Nodo
+from functools import lru_cache
 
 class ListaEnlazada:
     """TAD lista enlazada simple. No usar list de Python por debajo."""
@@ -30,6 +31,23 @@ class ListaEnlazada:
     
     def __iter__(self):
         return self.IteradorLista(self.header)
+
+    def __add__(self, other):
+        if not isinstance(other, ListaEnlazada):
+            raise TypeError(f'Objeto esperado para adicion: <ListaEnlazada>\nObjeto obtenido: {type(other)}')
+
+        if self.esta_vacia():
+            self.header = other.header
+            self.__tamanio += other.tamanio
+        else:
+            n = self.header
+            while n._nxt:
+                n = n._nxt
+    
+            n._nxt = other.header
+            self.__tamanio += other.tamanio
+
+        return self
 
     def __getitem__(self, key):
         if not isinstance(key, int):
