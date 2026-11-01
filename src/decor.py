@@ -1,13 +1,13 @@
 def opcion(msg: str):
     def opcion(func):
-        def menu(*args, **kwargs):
+        def wrapper(*args, **kwargs):
             print(msg)
-            opcion = None
+            op: int
             try:
-                opcion = int(input("> ").strip())
+                op = int(input("> ").strip())
             except Exception as e:
                 print(f"Opcion no valida: {e}")
                 return True
-            return func(opcion)
-        return menu
+            return func(op)
+        return wrapper
     return opcion

@@ -1,3 +1,4 @@
+import random
 from collections import deque
 from src.tads.nodo import Nodo
 
@@ -23,7 +24,9 @@ class ListaEnlazada:
         self.__tamanio = 0
 
     def __str__(self):
-        return str(list(self)) #TODO Hace print de la clase y espacio en memoria que ocupa
+        r = [str(c) for c in self]
+        r = "\n".join(r)
+        return r
     
     def __iter__(self):
         return self.IteradorLista(self.header)
@@ -40,7 +43,6 @@ class ListaEnlazada:
             d = deque(maxlen=abs(key))
             for elem in self:
                 d.append(elem)
-            print(d)
 
             if len(d) < abs(key):
                 raise IndexError
@@ -48,6 +50,22 @@ class ListaEnlazada:
             return d[0]
         
         raise IndexError
+
+    def __setitem__(self, key, value):
+        if not isinstance(key, int):
+            raise TypeError("El índice debe ser un entero")
+
+        if key < 0:
+            key += self.tamanio
+
+        if key < 0 or key >= self.tamanio:
+            raise IndexError("Índice fuera de rango")
+
+        actual = self.header
+        for _ in range(key):
+            actual = actual._nxt
+        
+        actual._elem = value
 
     def __len__(self):
         return self.tamanio
@@ -65,6 +83,7 @@ class ListaEnlazada:
     def insertar_al_final(self, dato) -> None:
         if not self.header:
             self.header = Nodo(dato)
+            self.__tamanio += 1
             return
         
         n = self.header
@@ -95,7 +114,26 @@ class ListaEnlazada:
 
         return False
 
+    def shuffle(self):
+        index = [n for n in range(self.tamanio)]
+        random.shuffle(index)
+        new = ListaEnlazada()
+
+        for i in index:
+            new.insertar_al_final(self[i])
+        else: return new
+
 
     @property
     def tamanio(self):
         return self.__tamanio
+
+
+if __name__ == "__main__":
+    # For test only!
+    lista = ListaEnlazada()
+    for i in range(100):
+        lista.insertar_al_final(i)
+
+    print(lista)
+    print(lista.shuffle())

@@ -49,16 +49,25 @@ def bo_menu_match(opcion= None):
         case 0:
             return False
         case 1:
-            id_ = input("ID: ").strip()
-            cancion = busqueda_lineal(BIBLIOTECA._canciones, id_)
+            cancion = busqueda_lineal(BIBLIOTECA._canciones, input("ID: ").strip())
             if cancion:
                 print(cancion)
         case 2:
-            pendiente()
+            cancion = busqueda_binaria(BIBLIOTECA._canciones, input("ID: ").strip())
+            if cancion:
+                print(cancion)
         case 3:
-            pendiente()
+            canciones_shuffle = BIBLIOTECA._canciones.shuffle()
+            print('--- Catalogo completo desordenado:')
+            print(canciones_shuffle)
+            print('--- Ordenamiento por seleccion:')
+            print(ordenar_seleccion(canciones_shuffle))
         case 4:
-            pendiente()
+            canciones_shuffle = BIBLIOTECA._canciones.shuffle()
+            print('--- Catalogo completo desordenado:')
+            print(canciones_shuffle)
+            print('--- Ordenamiento por insercion:')
+            print(ordenar_insercion(canciones_shuffle))
         case _:
             print("Opción inválida.")
     

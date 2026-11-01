@@ -13,8 +13,7 @@ class Biblioteca:
 
 
     def listar(self):
-        for cancion in self._canciones:
-            print(cancion)
+        print(self._canciones)
 
     def buscar(self, id_cancion):
         try:
