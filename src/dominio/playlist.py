@@ -36,3 +36,15 @@ class Playlist:
             print(f"Ultima cancion quitada: {cancion}")
         except PilaVaciaError as e:
             print(e)
+
+    def cargar_csv(self):
+        pass #TODO Aplicar carga de csv para playlist e historial
+
+    def guardar_csv(self):
+        pass #TODO Aplicar guardado de csv: playlist e historial
+
+    def cargar_bin(self):
+        pass #TODO Aplicar carga de binario para playlist e historial
+
+    def guardar_bin(self):
+            pass #TODO Aplicar guardado de binario: playlist e historial

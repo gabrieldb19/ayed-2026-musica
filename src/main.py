@@ -52,9 +52,28 @@ sub_bo = ["=== Busqueda - Ordenamiento ===",
         "3.4. Ordenar por Insercion",
         "0. Volver al menu principal"]
 
+sub_cg = ["=== Carga - Guardado ===",
+        "6.1. Cargar Playlist/Historial desde csv",
+        "6.2. Guardar Playlist/Historial en csv",
+        "6.3. Cargar Playlist/Historial desde binario",
+        "6.4. Guardar Playlist/Historial en binario",
+        "0. Volver al menu principal"]
+
 menu = "\n".join(menu)
 sub = "\n".join(sub_playlist)
 bo = "\n".join(sub_bo)
+cg = "\n".join(sub_cg)
+
+@opcion(msg= cg)
+def cg_menu_match(opcion=None):
+    match opcion:
+        case 0:
+            return False
+        case 1|2|3|4:
+            pendiente()
+        case _:
+            print("Opción inválida.")
+    return True
 
 @opcion(msg= bo)
 def bo_menu_match(opcion=None):
@@ -119,11 +138,16 @@ def menu_match(opcion= None):
         case 5:
             sub_menu()
         case 6:
-            pendiente()
+            cg_menu()
         case _:
             print("Opción inválida.")
     
     return True
+
+def cg_menu():
+    continuar = True
+    while continuar:
+        continuar = cg_menu_match()
 
 def bo_menu():
     continuar = True
