@@ -2,3 +2,5 @@
 
 # "pokedex" | "recetario" | "musica"
 TEMA = "musica"
+
+PLAYLIST_PATH = 'data/playlist.csv'

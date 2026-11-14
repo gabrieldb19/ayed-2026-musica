@@ -1,3 +1,6 @@
+from src.config import PLAYLIST_PATH
+from src.persistencia import *
+from src.dominio.canciones import Cancion
 from src.tads import Pila, Cola
 from src.excepciones import PilaVaciaError, ColaVaciaError
 
@@ -37,14 +40,34 @@ class Playlist:
         except PilaVaciaError as e:
             print(e)
 
-    def cargar_csv(self):
-        pass #TODO Aplicar carga de csv para playlist e historial
+    def load_csv(self):
+        for fila in cargar_csv(PLAYLIST_PATH):
+            self._playlist.items.insertar_al_final(Cancion(**fila))
 
-    def guardar_csv(self):
-        pass #TODO Aplicar guardado de csv: playlist e historial
+        print('> Playlist cargada desde csv')
 
-    def cargar_bin(self):
+    def save_csv(self):
+        if not self._playlist.items.esta_vacia():
+            canciones = []
+            for cancion in self._playlist.items:
+                c = cancion.to_dict()
+                canciones.append(c)
+
+            guardar_csv(ruta=PLAYLIST_PATH,
+                        filas= canciones,
+                        encabezados= ['id',
+                                    'titulo',
+                                    'artista',
+                                    'album',
+                                    'genero',
+                                    'anio',
+                                    'duracion_seg']
+                        )
+
+        print(f'> Playlist guardada en: {PLAYLIST_PATH}')
+
+    def load_bin(self):
         pass #TODO Aplicar carga de binario para playlist e historial
 
-    def guardar_bin(self):
+    def save_bin(self):
             pass #TODO Aplicar guardado de binario: playlist e historial

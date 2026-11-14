@@ -69,7 +69,11 @@ def cg_menu_match(opcion=None):
     match opcion:
         case 0:
             return False
-        case 1|2|3|4:
+        case 1:
+            PLAYLIST.load_csv()
+        case 2:
+            PLAYLIST.save_csv()
+        case 3|4:
             pendiente()
         case _:
             print("Opción inválida.")

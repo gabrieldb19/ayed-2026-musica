@@ -8,4 +8,8 @@ def cargar_csv(ruta):
 
 
 def guardar_csv(ruta, filas, encabezados):
-    raise NotImplementedError
+    with open(ruta, mode='w', newline='', encoding='utf-8') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames= encabezados)
+
+        writer.writeheader()
+        writer.writerows(filas)

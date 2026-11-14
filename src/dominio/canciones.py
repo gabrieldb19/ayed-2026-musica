@@ -10,3 +10,15 @@ class Cancion:
 
     def __str__(self):
         return f"[{self.id}] {self.titulo} - {self.artista} ({self.anio})"
+
+    def to_dict(self):
+        d = {
+            'id': self.id,
+            'titulo': self.titulo,
+            'artista': self.artista,
+            'album': self.album,
+            'genero': self.genero,
+            'anio': self.anio,
+            'duracion_seg': self.duracion_seg
+        }
+        return d

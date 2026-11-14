@@ -1,3 +1,4 @@
+import datetime
 from src.dominio.canciones import Cancion
 from src.persistencia.texto import cargar_csv
 from src.tads import ListaEnlazada
@@ -38,7 +39,7 @@ class Biblioteca:
         """Devuelve la Cancion con ese id."""
         try:
             cancion = self.buscar(id_cancion)
-            print(f'{pre}{cancion}')
+            print(f'{pre}{cancion.titulo} - {cancion.artista} - {cancion.album} - {cancion.genero} - {cancion.anio} ({str(datetime.timedelta(seconds=cancion.duracion_seg))})')
         except ItemNoEncontradoError as e:
             print(e)
 
