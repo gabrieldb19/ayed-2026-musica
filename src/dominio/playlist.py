@@ -1,4 +1,4 @@
-from src.config import PLAYLIST_PATH
+from src.config import PLAYLIST_PATH, HISTORIAL_PATH, ENCABEZADOS
 from src.persistencia import *
 from src.dominio.canciones import Cancion
 from src.tads import Pila, Cola
@@ -41,10 +41,15 @@ class Playlist:
             print(e)
 
     def load_csv(self):
-        for fila in cargar_csv(PLAYLIST_PATH):
+        for fila in cargar_csv(PLAYLIST_PATH['csv']):
             self._playlist.items.insertar_al_final(Cancion(**fila))
 
-        print('> Playlist cargada desde csv')
+        print(f'> Playlist cargada desde csv: {PLAYLIST_PATH['csv']}')
+
+        for fila in cargar_csv(HISTORIAL_PATH['csv']):
+            self._historial.items.insertar_al_final(Cancion(**fila))
+
+        print(f'> Historial cargado desde csv: {HISTORIAL_PATH['csv']}')
 
     def save_csv(self):
         if not self._playlist.items.esta_vacia():
@@ -53,18 +58,25 @@ class Playlist:
                 c = cancion.to_dict()
                 canciones.append(c)
 
-            guardar_csv(ruta=PLAYLIST_PATH,
+            guardar_csv(ruta=PLAYLIST_PATH['csv'],
                         filas= canciones,
-                        encabezados= ['id',
-                                    'titulo',
-                                    'artista',
-                                    'album',
-                                    'genero',
-                                    'anio',
-                                    'duracion_seg']
+                        encabezados= ENCABEZADOS
                         )
 
-        print(f'> Playlist guardada en: {PLAYLIST_PATH}')
+            print(f'> Playlist guardada en: {PLAYLIST_PATH['csv']}')
+
+        if not self._historial.items.esta_vacia():
+            canciones = []
+            for cancion in self._historial.items:
+                c = cancion.to_dict()
+                canciones.append(c)
+
+            guardar_csv(ruta=HISTORIAL_PATH['csv'],
+                        filas= canciones,
+                        encabezados= ENCABEZADOS
+                        )
+
+            print(f'> Historial guardado en: {HISTORIAL_PATH['csv']}')
 
     def load_bin(self):
         pass #TODO Aplicar carga de binario para playlist e historial

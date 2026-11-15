@@ -3,4 +3,6 @@
 # "pokedex" | "recetario" | "musica"
 TEMA = "musica"
 
-PLAYLIST_PATH = 'data/playlist.csv'
+PLAYLIST_PATH = {'csv': 'data/playlist.csv'}
+HISTORIAL_PATH = {'csv': 'data/historial.csv'}
+ENCABEZADOS = ['id','titulo','artista','album','genero','anio','duracion_seg']
