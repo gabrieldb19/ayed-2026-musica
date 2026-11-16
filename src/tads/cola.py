@@ -33,3 +33,10 @@ class Cola:
     @property
     def items(self):
         return self.__items
+    
+    @items.setter
+    def items(self, lista):
+        if isinstance(lista, ListaEnlazada):
+            self.__items = lista
+        else:
+            raise TypeError("El objeto a asignar en Cola.items debe ser una instancia de ListaEnlazada")

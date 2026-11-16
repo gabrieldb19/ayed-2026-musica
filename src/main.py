@@ -38,11 +38,11 @@ menu = ["",
         "0. Salir"]
 
 sub_playlist = ["=== Playlist ===",
-        "6.1. Mostrar playlist",
-        "6.2. Agregar a playlist",
-        "6.3. Playlist (next)",
-        "6.4. Mostrar historial",
-        "6.5. Historial (quitar)",
+        "5.1. Mostrar playlist",
+        "5.2. Agregar a playlist",
+        "5.3. Playlist (next)",
+        "5.4. Mostrar historial",
+        "5.5. Historial (quitar)",
         "0. Volver al menu principal"]
 
 sub_bo = ["=== Busqueda - Ordenamiento ===",
@@ -57,6 +57,7 @@ sub_cg = ["=== Carga - Guardado ===",
         "6.2. Guardar Playlist/Historial en csv",
         "6.3. Cargar Playlist/Historial desde binario",
         "6.4. Guardar Playlist/Historial en binario",
+        "6.5. Cambiar cancion de la Playlist (binario)",
         "0. Volver al menu principal"]
 
 menu = "\n".join(menu)
@@ -73,8 +74,12 @@ def cg_menu_match(opcion=None):
             PLAYLIST.load_csv()
         case 2:
             PLAYLIST.save_csv()
-        case 3|4:
-            pendiente()
+        case 3:
+            PLAYLIST.load_bin()
+        case 4:
+            PLAYLIST.save_bin()
+        case 5:
+            PLAYLIST.cambiar_cancion(BIBLIOTECA)
         case _:
             print("Opción inválida.")
     return True

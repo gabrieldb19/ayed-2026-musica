@@ -79,7 +79,38 @@ class Playlist:
             print(f'> Historial guardado en: {HISTORIAL_PATH['csv']}')
 
     def load_bin(self):
-        pass #TODO Aplicar carga de binario para playlist e historial
+        try:
+            lista = cargar_binario(PLAYLIST_PATH['bin'])
+            self._playlist.items = lista
+            print(f'> Playlist cargada desde: {PLAYLIST_PATH['bin']}')
+
+            lista = cargar_binario(HISTORIAL_PATH['bin'])
+            self._historial.items = lista
+            print(f'> Historial cargado desde: {HISTORIAL_PATH['bin']}')
+        except Exception as e:
+            print(e)
 
     def save_bin(self):
-            pass #TODO Aplicar guardado de binario: playlist e historial
+        if not self._playlist.items.esta_vacia():
+            guardar_binario(PLAYLIST_PATH['bin'], self._playlist.items)
+            print(f'> Playlist guardada en: {PLAYLIST_PATH['bin']}')
+
+        if not self._playlist.items.esta_vacia():
+            guardar_binario(HISTORIAL_PATH['bin'], self._historial.items)
+            print(f'> Historial guardado en: {HISTORIAL_PATH['bin']}')
+
+    def cambiar_cancion(self, biblioteca):
+        try:
+            n = int(input('> Posicion: '))
+            i = input('> ID nuevo: ')
+
+            nuevo = biblioteca.buscar(i)
+            actualizar_registro(PLAYLIST_PATH['bin'], n, nuevo)
+
+            print('Registro actualizado exitosamente!')
+            print('Recargando playlist actualizada...')
+
+            self.load_bin()
+
+        except Exception as e:
+            print(e)
