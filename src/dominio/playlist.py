@@ -41,15 +41,17 @@ class Playlist:
             print(e)
 
     def load_csv(self):
+        self._playlist.items = ListaEnlazada()
         for fila in cargar_csv(PLAYLIST_PATH['csv']):
             self._playlist.items.insertar_al_final(Cancion(**fila))
 
-        print(f'> Playlist cargada desde csv: {PLAYLIST_PATH['csv']}')
+        print(f'> Playlist cargada desde csv: {PLAYLIST_PATH["csv"]}')
 
+        self._historial.items = ListaEnlazada()
         for fila in cargar_csv(HISTORIAL_PATH['csv']):
             self._historial.items.insertar_al_final(Cancion(**fila))
 
-        print(f'> Historial cargado desde csv: {HISTORIAL_PATH['csv']}')
+        print(f'> Historial cargado desde csv: {HISTORIAL_PATH["csv"]}')
 
     def save_csv(self):
         if not self._playlist.items.esta_vacia():
@@ -63,7 +65,7 @@ class Playlist:
                         encabezados= ENCABEZADOS
                         )
 
-            print(f'> Playlist guardada en: {PLAYLIST_PATH['csv']}')
+            print(f'> Playlist guardada en: {PLAYLIST_PATH["csv"]}')
 
         if not self._historial.items.esta_vacia():
             canciones = []
@@ -76,28 +78,28 @@ class Playlist:
                         encabezados= ENCABEZADOS
                         )
 
-            print(f'> Historial guardado en: {HISTORIAL_PATH['csv']}')
+            print(f'> Historial guardado en: {HISTORIAL_PATH["csv"]}')
 
     def load_bin(self):
         try:
             lista = cargar_binario(PLAYLIST_PATH['bin'])
             self._playlist.items = lista
-            print(f'> Playlist cargada desde: {PLAYLIST_PATH['bin']}')
+            print(f'> Playlist cargada desde: {PLAYLIST_PATH["bin"]}')
 
             lista = cargar_binario(HISTORIAL_PATH['bin'])
             self._historial.items = lista
-            print(f'> Historial cargado desde: {HISTORIAL_PATH['bin']}')
+            print(f'> Historial cargado desde: {HISTORIAL_PATH["bin"]}')
         except Exception as e:
             print(e)
 
     def save_bin(self):
         if not self._playlist.items.esta_vacia():
             guardar_binario(PLAYLIST_PATH['bin'], self._playlist.items)
-            print(f'> Playlist guardada en: {PLAYLIST_PATH['bin']}')
+            print(f'> Playlist guardada en: {PLAYLIST_PATH["bin"]}')
 
-        if not self._playlist.items.esta_vacia():
+        if not self._historial.items.esta_vacia():
             guardar_binario(HISTORIAL_PATH['bin'], self._historial.items)
-            print(f'> Historial guardado en: {HISTORIAL_PATH['bin']}')
+            print(f'> Historial guardado en: {HISTORIAL_PATH["bin"]}')
 
     def cambiar_cancion(self, biblioteca):
         try:

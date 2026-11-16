@@ -23,7 +23,7 @@ from src.tads import ListaEnlazada
 from src.dominio.canciones import Cancion
 from src.excepciones import ArchivoInvalidoError
 
-FORMATO = struct.Struct("<I 30s 25s 30s 12s 2H")
+FORMATO = struct.Struct("<I 30s 40s 30s 12s 2H")
 HEADER = struct.Struct("<4s 1s I")
 MAGIA = b'AYED'
 TEMA = b"M"
@@ -40,7 +40,7 @@ def _item_a_tupla(c: Cancion):
     return (
         c.id,
         _a_bytes(c.titulo, 30),
-        _a_bytes(c.artista, 25),
+        _a_bytes(c.artista, 40),
         _a_bytes(c.album, 30),
         _a_bytes(c.genero, 12),
         c.anio,
@@ -55,8 +55,8 @@ def _tupla_a_item(t):
                     artista= _a_texto(t[2]),
                     album= _a_texto(t[3]),
                     genero= _a_texto(t[4]),
-                    anio= t[0],
-                    duracion_seg= t[0]
+                    anio= t[5],
+                    duracion_seg= t[6]
                     )
 
 
@@ -101,5 +101,9 @@ def actualizar_registro(ruta, posicion, item):
         raise TypeError("El el objeto debe ser una instancia de Cancion")
     
     with open(ruta, "r+b") as archivo:
+        cabecera = archivo.read(HEADER.size)
+        cantidad = HEADER.unpack(cabecera)[2]
+        if not 0 <= posicion < cantidad:
+            raise IndexError(f"Posición {posicion} fuera de rango (0-{cantidad - 1})")
         archivo.seek(HEADER.size + posicion * FORMATO.size)
         archivo.write(FORMATO.pack(*_item_a_tupla(item)))

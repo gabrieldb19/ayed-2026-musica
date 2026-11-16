@@ -107,9 +107,16 @@ Mediciones (`time.perf_counter`):
 
 ## 6. Persistencia (E5)
 
-- Layout del registro binario (campos, `struct`, anchos):
-- Header:
-- Cómo se actualiza un registro por posición:
+- Formato de texto: se usa CSV (`data/playlist.csv`, `data/historial.csv`) con encabezado en la primera línea, un registro por línea y coma como separador, leído con el módulo `csv`. Es acceso secuencial: se guarda y se carga el archivo completo.
+- Layout del registro binario: `struct.Struct("<I 30s 40s 30s 12s 2H")` = 120 bytes por registro.
+  id (I, 4 B), título (30 B), artista (40 B), álbum (30 B), género (12 B), año (H, 2 B), duración en segundos (H, 2 B).
+  Las cadenas se codifican en UTF-8 y se recortan o rellenan con `\x00` hasta el ancho fijo.
+- Header: `struct.Struct("<4s 1s I")` = 9 bytes: magia `AYED`, tema `M` (música) y cantidad de registros.
+- Archivos: `data/playlist.bin` y `data/historial.bin`. No se versionan (`*.bin` en `.gitignore`); el programa los genera desde el menú.
+- Actualización por posición: `seek(HEADER.size + posicion * FORMATO.size)` y se pisa ese único registro (acceso directo, O(1)). Ej.: el registro 7 empieza en el byte 9 + 7 × 120 = 849. La posición se valida contra la cantidad del header.
+- Alta y baja: se hacen sobre la memoria (cola/pila) y se persisten reescribiendo el archivo completo con `guardar_binario`; solo la modificación usa acceso directo.
+- Errores: `ArchivoInvalidoError` ante binario truncado, magia incorrecta o tema distinto.
+- Limitaciones: los cambios en memoria se persisten recién al elegir "Guardar"; las rutas son relativas a la raíz del repo.
 
 ## 7. Reparto de trabajo (E6)
 

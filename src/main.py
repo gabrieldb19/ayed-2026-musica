@@ -1,3 +1,4 @@
+from src.excepciones import ItemNoEncontradoError
 from src.config import TEMA
 from src.dominio import BIBLIOTECA, PLAYLIST
 from src.dominio.biblioteca import CLAVES
@@ -114,10 +115,11 @@ def sub_menu_match(opcion= None):
         case 1:
             PLAYLIST.ver_playlist()
         case 2:
-            id_ = input("ID: ").strip()
-            cancion = BIBLIOTECA.buscar(id_)
-            if cancion:
+            try:
+                cancion = BIBLIOTECA.buscar(input("ID: ").strip())
                 PLAYLIST.agregar_playlist(cancion)
+            except (ItemNoEncontradoError, ValueError) as e:
+                print(e if isinstance(e, ItemNoEncontradoError) else "# El ID debe ser un número")
         case 3:
             PLAYLIST.next_cancion()
         case 4:
