@@ -54,31 +54,17 @@ class Playlist:
         print(f'> Historial cargado desde csv: {HISTORIAL_PATH["csv"]}')
 
     def save_csv(self):
-        if not self._playlist.items.esta_vacia():
-            canciones = []
-            for cancion in self._playlist.items:
-                c = cancion.to_dict()
-                canciones.append(c)
+        canciones = [c.to_dict() for c in self._playlist.items]
+        guardar_csv(ruta=PLAYLIST_PATH['csv'],
+                    filas=canciones,
+                    encabezados=ENCABEZADOS)
+        print(f'> Playlist guardada en: {PLAYLIST_PATH["csv"]}')
 
-            guardar_csv(ruta=PLAYLIST_PATH['csv'],
-                        filas= canciones,
-                        encabezados= ENCABEZADOS
-                        )
-
-            print(f'> Playlist guardada en: {PLAYLIST_PATH["csv"]}')
-
-        if not self._historial.items.esta_vacia():
-            canciones = []
-            for cancion in self._historial.items:
-                c = cancion.to_dict()
-                canciones.append(c)
-
-            guardar_csv(ruta=HISTORIAL_PATH['csv'],
-                        filas= canciones,
-                        encabezados= ENCABEZADOS
-                        )
-
-            print(f'> Historial guardado en: {HISTORIAL_PATH["csv"]}')
+        canciones = [c.to_dict() for c in self._historial.items]
+        guardar_csv(ruta=HISTORIAL_PATH['csv'],
+                    filas=canciones,
+                    encabezados=ENCABEZADOS)
+        print(f'> Historial guardado en: {HISTORIAL_PATH["csv"]}')
 
     def load_bin(self):
         try:
@@ -93,13 +79,11 @@ class Playlist:
             print(e)
 
     def save_bin(self):
-        if not self._playlist.items.esta_vacia():
-            guardar_binario(PLAYLIST_PATH['bin'], self._playlist.items)
-            print(f'> Playlist guardada en: {PLAYLIST_PATH["bin"]}')
+        guardar_binario(PLAYLIST_PATH['bin'], self._playlist.items)
+        print(f'> Playlist guardada en: {PLAYLIST_PATH["bin"]}')
 
-        if not self._historial.items.esta_vacia():
-            guardar_binario(HISTORIAL_PATH['bin'], self._historial.items)
-            print(f'> Historial guardado en: {HISTORIAL_PATH["bin"]}')
+        guardar_binario(HISTORIAL_PATH['bin'], self._historial.items)
+        print(f'> Historial guardado en: {HISTORIAL_PATH["bin"]}')
 
     def cambiar_cancion(self, biblioteca):
         try:

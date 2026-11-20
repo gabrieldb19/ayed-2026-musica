@@ -11,6 +11,6 @@ Fecha de esta versión del archivo:
 | E3 | 4/10/2026 | Gemini | Comprension de consigna | Se copio y pego la consigna del informe E3 para tener una referiencia de como escribir los metodos. | Todo, se uso como referencia y luego se escribio los metodos y propiedades correspondientes a las clases en el informe. | Gabriel Banda |
 | E4 | 01/11/2026 | Claude | Revisión de código, diagnóstico de tiempos y debug | Se compartio el repositorio para eficiencia de revision | Verificacion de codigo y pruebas | Gabriel Banda |
 | E5 | 15/11/2026 | Claude | Revisión de código, detección de bugs y redacción del informe §6 | Se compartió el repositorio y las guías; se pidió revisión de la persistencia y de esta fila | Corrección de los bugs señalados (carga de año/duración, comillas en f-strings, captura de excepciones, ancho del campo artista) y ajuste del informe a nuestro código | Gabriel Banda |
-| E6 |  |  |  |  |  |  |
+| E6 | 18/11/2026 | Claude | Revisión de código, redacción de documentación | Se compartió el repo y las guías; se pidió revisión de codigo, informes y README | Informes, README  | Gabriel Banda, Areli Rojas |
 
 Compromiso: cualquiera del grupo puede explicar cualquier archivo del tag.

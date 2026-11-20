@@ -122,4 +122,6 @@ Mediciones (`time.perf_counter`):
 
 | Integrante | Qué hizo | Qué puede defender |
 | --- | --- | --- |
-|  |  |  |
+| Gabriel Banda | Diseño general, TADs (ListaEnlazada, Pila, Cola), recursión (versiones_de), persistencia CSV y binario, integración del menú. | binario.py, lista_enlazada.py, biblioteca.py |
+| Matías Sanguinetti | Algoritmos de búsqueda y ordenamiento. | busqueda.py, ordenamiento.py |
+| Areli Rojas | Redacción y revisión de informes, declaracion IA y protocolos de prueba. | PROTOCOLO_PRUEBAS.md, pila.py y cola.py |
